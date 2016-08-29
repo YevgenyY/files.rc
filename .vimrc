@@ -123,9 +123,14 @@ let g:snippets_dir = "~/.vim/vim-snippets/snippets"
 " настройки Vim-Airline
 set laststatus=2
 let g:airline_theme='badwolf'
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
 
 " TagBar настройки
 map <F4> :TagbarToggle<CR>
