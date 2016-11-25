@@ -128,7 +128,7 @@ let g:airline_symbols.space = "\ua0"
 
 
 " TagBar настройки
-map <F4> :TagbarToggle<CR>
+map <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 0 " автофокус на Tagbar при открытии
 
 " NerdTree настройки
