@@ -1,7 +1,7 @@
 # .bashrc
 
-alias ll='ls -lGh --color -h --group-directories-first'
-alias la='ls -laGh --color -h --group-directories-first'
+alias ll='ls -lGh'
+alias la='ls -laGh'
 alias psx='ps -ax | less'
 alias psg='ps -ax | grep $1'
 alias cdo='cd $OLDPWD'
