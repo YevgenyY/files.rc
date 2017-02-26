@@ -103,6 +103,7 @@ set guioptions-=T    " тулбар
 " настройка на Tab
 set smarttab
 set tabstop=4
+set sw=4 sts=4
 
 "  при переходе за границу в 80 символов в Ruby/Python/js/C/C++ подсвечиваем на темном фоне текст
 augroup vimrc_autocmds
