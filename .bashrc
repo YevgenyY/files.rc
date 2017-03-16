@@ -21,6 +21,7 @@ export PATH=$PATH:/home/eugen/android-sdk-linux/platform-tools/
 export WITHOUT_X11=yes
 export GIT_SSL_NO_VERIFY=true
 export LD_LIBRARY_PATH=/usr/lib/vmware/lib/libglibmm-2.4.so.1/:$LD_LIBRARY_PATH
+export EDITOR='vim'
 
 
 # Colorize ls output
