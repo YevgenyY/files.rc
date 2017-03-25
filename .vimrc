@@ -43,6 +43,7 @@ aunmenu Help.
 aunmenu Window.
 let no_buffers_menu=1
 set mousemodel=popup
+set mouse=a
 
 set ruler
 set completeopt-=preview
