@@ -8,6 +8,7 @@ alias cdo='cd $OLDPWD'
 alias vi='vim'
 alias ff='/usr/bin/find . -name "$@"'
 alias stelnet='openssl s_client -connect $1'
+alias cashow='openssl x509 -text -noout -in $1'
 
 ffs () { /usr/bin/find . -name "$@"'*' ; }
 
