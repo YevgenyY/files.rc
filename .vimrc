@@ -1,193 +1,175 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-"=====================================================
-" Vundle settings
-"=====================================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'		" let Vundle manage Vundle, required
-
-"---------=== Code/project navigation ===-------------
-Plugin 'scrooloose/nerdtree' 	    	" Project and file navigation
-Plugin 'majutsushi/tagbar'          	" Class/module browser
-
-"------------------=== Other ===----------------------
-"Plugin 'bling/vim-airline'   	    	" Lean & mean status/tabline for vim
-"Plugin 'vim-airline/vim-airline-themes' " Lean & mean status/tabline for vim
-Plugin 'fisadev/FixedTaskList.vim'  	" Pending tasks list
-"Plugin 'rosenfeld/conque-term'      	" Consoles as buffers
-Plugin 'tpope/vim-surround'	   	" Parentheses, brackets, quotes, XML tags, and more
-"Plugin 'Valloric/YouCompleteMe'		" Auto complete with clang API
-
-"--------------=== Snippets support ===---------------
-Plugin 'garbas/vim-snipmate'		" Snippets manager
-Plugin 'MarcWeber/vim-addon-mw-utils'	" dependencies #1
-Plugin 'tomtom/tlib_vim'		" dependencies #2
-Plugin 'honza/vim-snippets'		" snippets repo
-
-"---------------=== Languages support ===-------------
-
-call vundle#end()            		" required
-filetype on
-filetype plugin on
-filetype plugin indent on
-
-"=====================================================
-" General settings
-"=====================================================
-set backspace=indent,eol,start
-aunmenu Help.
-aunmenu Window.
-let no_buffers_menu=1
-set mousemodel=popup
-set mouse=a
-
-set ruler
-set completeopt-=preview
-set gcr=a:blinkon0
-if has("gui_running")
-  set cursorline
-endif
-set ttyfast
-
-" включить подсветку кода
-syntax on
-if has("gui_running")
-" GUI? устаналиваем тему и размер окна
-  set lines=50 columns=125
-  colorscheme molokai
-" раскомментируйте эти строки, если хотите, чтобы NERDTree/TagBar автоматически отображались при запуске vim
-" autocmd vimenter * TagbarToggle
-" autocmd vimenter * NERDTree
-" autocmd vimenter * if !argc() | NERDTree | endif
-
-" на маке vim?
-if has("mac")
-  set guifont=Consolas:h13
-  set fuoptions=maxvert,maxhorz
-else
-" дефолтный GUI
-"  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
-endif
-else
-" терминал?
-  colorscheme peachpuff
-endif
-
-tab sball
-set switchbuf=useopen
-
-" отключаем пищалку и мигание
-set visualbell t_vb= 
-set novisualbell       
-
-set enc=utf-8	     " utf-8 по дефолту в файлах
-set ls=2             " всегда показываем статусбар
-set incsearch	     " инкреминтируемый поиск
-set hlsearch	     " подсветка результатов поиска
-set nu	             " показывать номера строк
-set scrolloff=5	     " 5 строк при скролле за раз
-
-" отключаем бэкапы и своп-файлы
-set nobackup 	     " no backup files
-set nowritebackup    " only in case you don't want a backup file while editing
-set noswapfile 	     " no swap files
-
-" прячем панельки
-"set guioptions-=m   " меню
-set guioptions-=T    " тулбар
-"set guioptions-=r   "  скроллбары
-
-" настройка на Tab
-set smarttab
-set tabstop=4
-set sw=4 sts=4
-
-"  при переходе за границу в 80 символов в Ruby/Python/js/C/C++ подсвечиваем на темном фоне текст
-augroup vimrc_autocmds
-    autocmd!
-    autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
-    autocmd FileType ruby,python,javascript,c,cpp set nowrap
-augroup END
-
-" указываем каталог с настройками SnipMate
-let g:snippets_dir = "~/.vim/vim-snippets/snippets"
-
-" настройки Vim-Airline
-set laststatus=2
-let g:airline_theme='badwolf'
-"let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
+" Basic {
+	set encoding=utf8
+	if !has("gui_running")
+		set t_Co=256
+	endif
+	let mapleader=","
+" }
 
 
-" TagBar настройки
-map <F8> :TagbarToggle<CR>
-let g:tagbar_autofocus = 0 " автофокус на Tagbar при открытии
 
-" NerdTree настройки
-" показать NERDTree на F3
-map <F3> :NERDTreeToggle<CR>
-"игноррируемые файлы с расширениями
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']  
+" Productivity {
+	set ttyfast
+	set lazyredraw
+	set noswapfile
+	set autoread
+	set nobackup
+	set nowritebackup
+" }
 
-" TaskList настройки
-map <F2> :TaskList<CR> 	   " отобразить список тасков на F2
 
-" Работа буфферами
-map <C-q> :bd<CR> 	   " CTRL+Q - закрыть текущий буффер
+" BundleVundle {
+	set nocompatible
+	filetype off
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+	"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	":PluginInstall
+	Plugin 'vim-airline/vim-airline'
+	Plugin 'VundleVim/Vundle.vim'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'vim-airline/vim-airline-themes'
+	Plugin 'flazz/vim-colorschemes'
+	Plugin 'tpope/vim-commentary'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'majutsushi/tagbar'
+	call vundle#end()
+	filetype plugin indent on
+" }
 
-" Восстановить позицию курсора
-if has("autocmd")
-	  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
 
-"=====================================================
-" Python-mode settings
-"=====================================================
-" отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
+" Indentation {
+	set shiftround
+	set tabstop=4
+	set shiftwidth=4
+	set smarttab
+	set expandtab
+	set autoindent
+	set smartindent
+    set noet ci pi sts=0
+" }
 
-" документация
-let g:pymode_doc = 0
-let g:pymode_doc_key = 'K'
-" проверка кода
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-let g:pymode_lint_ignore="E501,W601,C0110"
-" провека кода после сохранения
-let g:pymode_lint_write = 1
 
-" поддержка virtualenv
-let g:pymode_virtualenv = 1
+" Search {
+	set hlsearch
+	set incsearch
+	set ignorecase
+" }
 
-" установка breakpoints
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
 
-" подстветка синтаксиса
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" Interface, colors, text {
+	syntax enable
+	" Text {
+	set wrap
+	" }
+	" Colors {
+	"set background=dark
+	"colorscheme xoria256
+	colorscheme elflord
+	"hi Visual term=reverse cterm=reverse guibg=Grey
+	" }
+	" Interface {
+	set cursorline
+	"set number
+	set mousehide
+	set wildmenu
+	set title
+	set showmode
+	set showcmd
+	set laststatus=2
+	set ruler
+	" }
+" }
 
-" отключить autofold по коду
-let g:pymode_folding = 0
 
-" возможность запускать код
-let g:pymode_run = 0
+" Plugins {
+	" NERDTree {
+	let NERDTreeShowHidden=1
+	let NERDTreeHighlightCursorline=0
+	" }
+	" Startify {
+	let g:startify_bookmarks = ['~/.vimrc',]
+	" }
+	" Airline {
+	let g:airline_theme='dark'
+	let g:airline#extensions#tabline#enabled = 1
+	let g:airline_left_sep = ''
+	let g:airline_right_sep = ''
+	let g:airline_section_y = 'BUF: %n'
+	function! CustomBranchFormat(name)
+		return 'Git: '.a:name
+	endfunction
+	let g:airline#extensions#branch#format='CustomBranchFormat'
+	" }
+	" Commantry {
+	":help commentary
+	"gc {motion} comment or uncomment
+	"10 gcc comment or uncomment 10 rows
+	":setlocal commentstring=//%s	setcomment // 
+	" reload .vimrc :so %
+" }
+let g:indentLine_enabled = 0
 
-" Useful mapping
-set pastetoggle=<F10>
-map <F5> :set invnumber<CR>
 
+" Custom {
+	set hidden  " if on buffers shos in NERDTree in new window, no split if modiffied
+	map <C-X> :bd<CR>
+	map <S-z><S-S> :w<CR>
+	
+	map <S-Z><S-X> :qa<CR>
+
+	map <F2> <C-w>w
+	map <C-J> :bprev<CR>
+	map <F3> :bprev<CR>
+	map <C-K> :bnext<CR>
+	"map <tab> :bnext<CR>
+	map <F4> :bnext<CR>
+	nnoremap <F5> :buffers<CR>:buffer<Space>
+	"map <F6> :Te<CR>
+
+	"Move Line or Selection up and down
+	nnoremap <F6> :m .+1<CR>==
+	nnoremap <F7> :m .-2<CR>==
+	inoremap <F6> <Esc>:m .+1<CR>==gi
+	inoremap <F7> <Esc>:m .-2<CR>==gi
+	vnoremap <F6> :m '>+1<CR>gv=gv
+	vnoremap <F7> :m '<-2<CR>gv=gv
+	"
+	"nnoremap <F8> :!%:p<CR>
+	nmap <F8> :TagbarToggle<CR>
+	" ctags -R .
+	" ctrl ] ---goto to definition
+	" ctrl t ---goto to back 
+	map <C-L> :NERDTreeToggle<CR>
+	map <F9> :NERDTreeToggle<CR>
+
+
+	
+	set pastetoggle=<F10> " to paste from OS buffer
+	nnoremap <F11> :set invnumber<CR>
+	nnoremap gd :setlocal commentstring=//%s
+	nnoremap <F12> :NERDTreeFind<CR>
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+	"":Te -- open explorer in new windo>w
+	":vs --new buffer; ctrl-w --move ; ctrl-c close; 10 ctrl-w >--bigger
+	"new --new buff
+	"S-R update current tree node
+	"":e .
+	"/\c ---search ignoring case
+	"" Shift v block ; = make code betteri formated
+	"C-v block S-i # Esc Esc
+	"gv x ---take sign off (gv last selection)
+	". repeat last command
+	"@: --repeat last command in cmd 
+	"q: --search in vim commands in history (in normal mode) ; big list ":his" --show 
+	"S -v block move to right >; left < ;; line S->>
+	"yw in insert mode C-o p --paste text
+	":so %  reload  .vimrc
+	"u --undo C-r --redo; A --insert at the end of line
+	"dddd
+	"S-@ : ---last command in Command Line
+	"S-m -goto Middle; S-h -goto up; S-l -goto end of screen
+	"
+" }
